@@ -44,5 +44,4 @@ const Layout = () => {
 		</BrowserRouter>
 	);
 };
-
 export default Layout;

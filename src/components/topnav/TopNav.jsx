@@ -2,6 +2,8 @@ import React from 'react';
 
 import Dropdown from '../dropdown/DropDown';
 
+import ThemeMenu from '../thememenu/ThemeMenu';
+
 import './topnav.css';
 
 import notifications from '../../assets/JsonData/notification.json';
@@ -69,11 +71,9 @@ const Topnav = () => {
 						renderItems={(item, index) => renderNotificationItem(item, index)}
 						renderFooter={() => <Link to="/">View All</Link>}
 					/>
-					{/* {drop down here} */}
 				</div>
 				<div className="topnav__right-item">
-					<Dropdown />
-					{/* {drop down here} */}
+					<ThemeMenu />
 				</div>
 			</div>
 		</div>

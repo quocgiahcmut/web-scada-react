@@ -1,13 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
 
 import Chart from 'react-apexcharts';
+
 import { Link } from 'react-router-dom';
+
+import Badge from '../components/badge/Badge';
 
 import statusCards from '../assets/JsonData/status-card-data.json';
 
 import StatusCard from '../components/status-card/StatusCard';
 
 import Table from '../components/table/Table';
+
+import ThemeAction from '../redux/actions/ThemeAction'
 
 const chartOptions = {
 	series: [
@@ -138,19 +145,27 @@ const renderOrderHead = (item, index) => {
 
 const renderOrderBody = (item, index) => {
 	return (
-		<tr>
+		<tr key={index}>
 			<td>{item.id}</td>
 			<td>{item.user}</td>
 			<td>{item.price}</td>
 			<td>{item.date}</td>
 			<td>
-				<span>{item.status}</span>
+				<Badge type={orderStatus[item.status]} content={item.status} />
 			</td>
 		</tr>
 	);
 };
 
 const Dashboard = () => {
+	const themeReducer = useSelector((state) => state.ThemeReducer.mode);
+  
+	const dispatch = useDispatch();
+
+	// useEffect(() => {
+	// 	dispatch(ThemeAction.getTheme());
+	// })
+
 	return (
 		<div>
 			<h2 className="page-header">Dashboard</h2>
@@ -168,7 +183,22 @@ const Dashboard = () => {
 				</div>
 				<div className="col-6">
 					<div className="card full-height">
-						<Chart options={chartOptions.options} series={chartOptions.series} type="line" height="100%" />
+						<Chart
+							options={
+								themeReducer === 'theme-mode-dark'
+									? {
+											...chartOptions.options,
+											theme: { mode: 'dark' },
+									  }
+									: {
+											...chartOptions.options,
+											theme: { mode: 'light' },
+									  }
+							}
+							series={chartOptions.series}
+							type="line"
+							height="100%"
+						/>
 						{/* chart */}
 					</div>
 				</div>
@@ -201,7 +231,7 @@ const Dashboard = () => {
 								headData={latestOrders.header}
 								bodyData={latestOrders.body}
 								renderBody={renderOrderBody}
-								renderHead={renderCustomerHeader}
+								renderHead={renderOrderHead}
 							/>
 						</div>
 						<div className="card__footer">

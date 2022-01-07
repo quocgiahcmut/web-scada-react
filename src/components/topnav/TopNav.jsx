@@ -14,6 +14,8 @@ import user_image from '../../assets/images/user.jpg';
 
 import user_menu from '../../assets/JsonData/user_menus.json';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 const curr_user = {
 	display_name: 'Tri Hoang',
 	image: user_image,
@@ -47,8 +49,11 @@ const renderUserMenu = (item, i) => {
 };
 
 const Topnav = () => {
+	const sideBarReducer = useSelector((state) => state.sidebar);
+	const activeMenu = sideBarReducer.active === undefined ? '' : sideBarReducer.active;
+
 	return (
-		<div className="topnav">
+		<div className={`topnav ${activeMenu === '' ? '' : 'active'}`}>
 			<div className="topnav__search">
 				<input type="text" placeholder="Tìm kiếm ở đây" />
 				<i className="bx bx-search"></i>

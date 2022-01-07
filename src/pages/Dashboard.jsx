@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Chart from 'react-apexcharts';
 
@@ -14,17 +14,15 @@ import StatusCard from '../components/status-card/StatusCard';
 
 import Table from '../components/table/Table';
 
-import ThemeAction from '../redux/actions/ThemeAction'
-
 const chartOptions = {
 	series: [
 		{
-			name: 'Online Customers',
+			name: 'Sản phẩm EE2013',
 			data: [40, 70, 20, 90, 36, 80, 30, 91, 60, 120],
 		},
 		{
-			name: 'Store Customers',
-			data: [40, 30, 70, 80, 40, 16, 40, 20, 51, 10],
+			name: 'Sản phẩm EE2015',
+			data: [40, 30, 70, 80, 40, 16, 40, 20, -51, 10],
 		},
 	],
 	options: {
@@ -51,7 +49,7 @@ const chartOptions = {
 };
 
 const topCustomers = {
-	head: ['user', 'total orders', 'total spending'],
+	head: ['Nhân viên', 'Tổng giờ công', 'Dự kiến'],
 	body: [
 		{
 			username: 'john doe',
@@ -92,51 +90,51 @@ const renderCustomerBody = (item, index) => (
 );
 
 const latestOrders = {
-	header: ['order id', 'user', 'total price', 'date', 'status'],
+	header: ['Mã SP', 'Nhân viên', 'số lượng', 'ngày SX', 'Trạng thái'],
 	body: [
 		{
 			id: '#OD1711',
 			user: 'john doe',
 			date: '17 Jun 2021',
-			price: '$900',
-			status: 'shipping',
+			price: '900',
+			status: 'đang thực hiện',
 		},
 		{
 			id: '#OD1712',
 			user: 'frank iva',
 			date: '1 Jun 2021',
-			price: '$400',
-			status: 'paid',
+			price: '400',
+			status: 'hoàn thành',
 		},
 		{
 			id: '#OD1713',
 			user: 'anthony baker',
 			date: '27 Jun 2021',
-			price: '$200',
-			status: 'pending',
+			price: '200',
+			status: 'đang thực hiện',
 		},
 		{
 			id: '#OD1712',
 			user: 'frank iva',
 			date: '1 Jun 2021',
-			price: '$400',
-			status: 'paid',
+			price: '400',
+			status: 'hoàn thành',
 		},
 		{
 			id: '#OD1713',
 			user: 'anthony baker',
 			date: '27 Jun 2021',
-			price: '$200',
-			status: 'refund',
+			price: '200',
+			status: 'thiếu',
 		},
 	],
 };
 
 const orderStatus = {
-	shipping: 'primary',
-	pending: 'warning',
-	paid: 'success',
-	refund: 'danger',
+	'đang chờ': 'primary',
+	'đang thực hiện': 'warning',
+	'hoàn thành': 'success',
+	thiếu: 'danger',
 };
 
 const renderOrderHead = (item, index) => {
@@ -158,13 +156,7 @@ const renderOrderBody = (item, index) => {
 };
 
 const Dashboard = () => {
-	const themeReducer = useSelector((state) => state.ThemeReducer.mode);
-  
-	const dispatch = useDispatch();
-
-	// useEffect(() => {
-	// 	dispatch(ThemeAction.getTheme());
-	// })
+	const themeReducer = useSelector((state) => state.theme.mode);
 
 	return (
 		<div>
@@ -217,7 +209,7 @@ const Dashboard = () => {
 							{/* table */}
 						</div>
 						<div className="card__footer">
-							<Link to="/customers">view all</Link>
+							<Link to="/warehouse">view all</Link>
 						</div>
 					</div>
 				</div>

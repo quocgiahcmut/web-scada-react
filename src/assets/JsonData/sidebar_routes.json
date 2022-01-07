@@ -2,46 +2,70 @@
     {
         "display_name": "Dashboard",
         "route": "/",
-        "icon": "bx bx-category-alt"
+        "icon": "bx bx-category-alt",
+        "subNav":[]
     },
     {
-        "display_name": "Customers",
-        "route": "/customers",
-        "icon": "bx bx-user-pin"
+        "display_name": "Warehouse",
+        "route": "/warehouse",
+        "icon": "bx bx-user-pin",
+        "subNav":[]
     },
     {
-        "display_name": "Products",
-        "route": "/products",
-        "icon": "bx bx-package"
-    },
-    {
-        "display_name": "Orders",
-        "route": "/orders",
+        "display_name": "QA/QC",
+        "route": "/qa-qc",
+        "icon": "bx bx-package",
+        "subNav":[
+        {
+        "display_name": "Máy 1",
+        "route": "/qa-qc/m1",
         "icon": "bx bx-cart"
+        },
+        {
+        "display_name": "Máy 2",
+        "route": "/qa-qc/m2",
+        "icon": "bx bx-cart"
+        },
+        {
+        "display_name": "Máy 3",
+        "route": "/qa-qc/m3",
+        "icon": "bx bx-cart"
+        },
+        {
+        "display_name": "Máy 4",
+        "route": "/qa-qc/m4",
+        "icon": "bx bx-cart"
+        }
+    ]
     },
     {
-        "display_name": "Analytics",
-        "route": "/analytics",
-        "icon": "bx bx-bar-chart-alt"
+        "display_name": "Compressors",
+        "route": "/compressors",
+        "icon": "bx bx-cart",
+        "subNav":[]
     },
     {
-        "display_name": "categories",
-        "route": "/categories",
-        "icon": "bx bx-list-ol"
+        "display_name": "warning",
+        "route": "/warning",
+        "icon": "bx bx-store-alt",
+        "subNav":[]
     },
     {
-        "display_name": "discount",
-        "route": "/discount",
-        "icon": "bx bx-gift"
-    },
-    {
-        "display_name": "inventory",
-        "route": "/inventory",
-        "icon": "bx bx-store-alt"
+        "display_name": "profile",
+        "route": "/profile",
+        "icon": "bx bx-user",
+        "subNav":[]
     },
     {
         "display_name": "settings",
         "route": "/settings",
-        "icon": "bx bx-cog"
+        "icon": "bx bx-cog",
+        "subNav":[]
+    },
+    {
+        "display_name": "log out",
+        "route": "/",
+        "icon": "bx bx-log-out",
+        "subNav":[]
     }
 ]

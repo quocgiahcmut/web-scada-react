@@ -6,7 +6,7 @@ import { createStore } from 'redux';
 
 import { Provider } from 'react-redux';
 
-import rootReducer from './redux/reducers';
+import store from './redux/store/store';
 
 import './assets/boxicons-2.0.7/css/boxicons.min.css';
 import './assets/css/grid.css';
@@ -15,14 +15,12 @@ import './assets/css/theme.css';
 
 import Layout from './components/layout/Layout';
 
-const store = createStore(rootReducer);
-
 ReactDOM.render(
-	<Provider store={store}>
-		<React.StrictMode>
+	<React.StrictMode>
+		<Provider store={store}>
 			<Layout />
-		</React.StrictMode>
-	</Provider>,
+		</Provider>
+	</React.StrictMode>,
 	document.getElementById('root')
 );
 

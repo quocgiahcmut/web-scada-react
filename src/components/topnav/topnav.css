@@ -6,6 +6,10 @@
   height:var(--topnav-height);
 }
 
+.topnav.active {
+  padding: 30px 30px 30px 100px;
+}
+
 .topnav__search {
   position:relative;
   height: 50px;

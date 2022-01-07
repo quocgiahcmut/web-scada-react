@@ -10,10 +10,14 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import ThemeAction from '../../redux/actions/ThemeAction';
+// import ThemeAction from '../../redux/actions/ThemeAction';
+
+import { setMode, setColor } from '../../redux/slice/ThemeSlice';
 
 const Layout = () => {
-	const themeReducer = useSelector((state) => state.ThemeReducer);
+	const themeReducer = useSelector((state) => state.theme);
+	const sideBarReducer = useSelector((state) => state.sidebar);
+	const activeMenu = sideBarReducer.active;
 
 	const dispatch = useDispatch();
 
@@ -22,9 +26,9 @@ const Layout = () => {
 
 		const colorClass = localStorage.getItem('colorMode', 'theme-mode-light');
 
-		dispatch(ThemeAction.setMode(themeClass));
+		dispatch(setMode(themeClass));
 
-		dispatch(ThemeAction.setColor(colorClass));
+		dispatch(setColor(colorClass));
 	}, [dispatch]);
 	return (
 		<BrowserRouter>
@@ -32,7 +36,7 @@ const Layout = () => {
 				render={(props) => (
 					<div className={`layout ${themeReducer.mode} ${themeReducer.color}`}>
 						<Sidebar {...props} />
-						<div className="layout__content">
+						<div className={`layout__content ${activeMenu === '' ? '' : 'active'}`}>
 							<TopNav />
 							<div className="layout__content-main">
 								<Routes />

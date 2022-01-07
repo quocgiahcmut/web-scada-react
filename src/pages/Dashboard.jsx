@@ -17,12 +17,12 @@ import Table from '../components/table/Table';
 const chartOptions = {
 	series: [
 		{
-			name: 'Sản phẩm EE2013',
+			name: 'EE2013',
 			data: [40, 70, 20, 90, 36, 80, 30, 91, 60, 120],
 		},
 		{
-			name: 'Sản phẩm EE2015',
-			data: [40, 30, 70, 80, 40, 16, 40, 20, -51, 10],
+			name: 'EE2015',
+			data: [40, 30, 70, 80, 40, 16, 40, 20, 51, 10],
 		},
 	],
 	options: {
@@ -40,7 +40,7 @@ const chartOptions = {
 			categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
 		},
 		legend: {
-			position: 'bottom',
+			position: 'top',
 		},
 		grid: {
 			show: false,
@@ -191,7 +191,6 @@ const Dashboard = () => {
 							type="line"
 							height="100%"
 						/>
-						{/* chart */}
 					</div>
 				</div>
 				<div className="col-5">

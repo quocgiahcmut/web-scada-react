@@ -14,7 +14,7 @@ import user_image from '../../assets/images/user.jpg';
 
 import user_menu from '../../assets/JsonData/user_menus.json';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const curr_user = {
 	display_name: 'Tri Hoang',

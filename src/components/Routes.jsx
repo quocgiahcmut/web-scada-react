@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Route, Switch } from 'react-router-dom';
 
-import Customers from '../pages/Customers';
+import Customers from '../pages/Warehouse';
 import Dashboard from '../pages/Dashboard';
 import QaqcDepartment from '../pages/Qaqc/QaqcDepartment';
 

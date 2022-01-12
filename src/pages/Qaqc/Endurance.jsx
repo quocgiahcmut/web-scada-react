@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 
 function Endurance() {
-  return (
-    <div>
-      Endurance
-    </div>
-  )
+  	useEffect(() => {
+			document.title = 'Endurance | SCADA';
+		}, []);
+	return (
+		<div>
+			<h2 className="page-header">Endurance</h2>
+			<div>Data goes here</div>
+		</div>
+	);
 }
 
-export default Endurance
+export default Endurance;

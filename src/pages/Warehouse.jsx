@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Table from '../components/table/Table';
 
-import customersList from '../assets/JsonData/customers-list.json';
+import wareHouseList from '../assets/JsonData/customers-list.json';
 
 const customerTableHead = ['', 'name', 'email', 'phone', 'total orders', 'total spend', 'location'];
 
@@ -20,10 +20,14 @@ const renderBody = (item, index) => (
 	</tr>
 );
 
-const Customers = () => {
+const WareHouse = () => {
+	useEffect(() => {
+		document.title = 'Warehouse | SCADA';
+	}, []);
+
 	return (
 		<div>
-			<h2 className="page-header">Customers</h2>
+			<h2 className="page-header">WareHouse</h2>
 			<div className="row">
 				<div className="col-12">
 					<div className="card">
@@ -31,7 +35,7 @@ const Customers = () => {
 							<Table
 								headData={customerTableHead}
 								renderHead={renderHead}
-								bodyData={customersList}
+								bodyData={wareHouseList}
 								renderBody={renderBody}
 							/>
 						</div>
@@ -42,4 +46,4 @@ const Customers = () => {
 	);
 };
 
-export default Customers;
+export default WareHouse;

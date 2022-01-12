@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useSelector } from 'react-redux';
 
@@ -157,7 +157,9 @@ const renderOrderBody = (item, index) => {
 
 const Dashboard = () => {
 	const themeReducer = useSelector((state) => state.theme.mode);
-
+	useEffect(() => {
+			document.title='Dashboard | SCADA'
+	},[])
 	return (
 		<div>
 			<h2 className="page-header">Dashboard</h2>

@@ -17,24 +17,24 @@
         "icon": "bx bx-package",
         "subNav":[
         {
-        "display_name": "Máy 1",
-        "route": "/qa-qc/m1",
-        "icon": "bx bx-cart"
+        "display_name": "Deformation",
+        "route": "/qa-qc/deformation",
+        "icon": "bx bx-desktop"
         },
         {
-        "display_name": "Máy 2",
-        "route": "/qa-qc/m2",
-        "icon": "bx bx-cart"
+        "display_name": "Forced Endurance",
+        "route": "/qa-qc/f-endurance",
+        "icon": "bx bx-desktop"
         },
         {
-        "display_name": "Máy 3",
-        "route": "/qa-qc/m3",
-        "icon": "bx bx-cart"
+        "display_name": "Endurance",
+        "route": "/qa-qc/endurance",
+        "icon": "bx bx-desktop"
         },
         {
-        "display_name": "Máy 4",
-        "route": "/qa-qc/m4",
-        "icon": "bx bx-cart"
+        "display_name": "Supply Discharge",
+        "route": "/qa-qc/sup-dis",
+        "icon": "bx bx-desktop"
         }
     ]
     },

@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 function Endurance() {
-
-
-  	useEffect(() => {
-			document.title = 'Endurance | SCADA';
-		}, []);
+	useEffect(() => {
+		document.title = 'Endurance | SCADA';
+	}, []);
 	return (
 		<div>
 			<h2 className="page-header">Endurance</h2>

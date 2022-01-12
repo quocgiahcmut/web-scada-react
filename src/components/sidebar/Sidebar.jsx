@@ -40,7 +40,6 @@ const SidebarItem = (props) => {
 function Sidebar(props) {
 	const sideBarReducer = useSelector((state) => state.sidebar);
 	const activeMenu = sideBarReducer.active;
-	console.log(activeMenu);
 	const dispatch = useDispatch();
 	const handleMenuClick = () => {
 		dispatch(setActiveMenu(activeMenu === '' ? 'active' : ''));

@@ -13,7 +13,6 @@ const theme = createSlice({
 		setColor: (state, action) => {
 			state.color = action.payload;
 		},
-		getTheme: (state, action) => {},
 	},
 });
 

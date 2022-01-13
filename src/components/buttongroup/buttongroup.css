@@ -1,4 +1,7 @@
-.css-d9c359-MuiButtonBase-root-MuiToggleButton-root.Mui-selected {
+.css-j4p6el-MuiButtonBase-root-MuiToggleButton-root.Mui-selected {
     color: var(--txt-white) !important;
     background-image: linear-gradient( to right, var(--main-color), var(--second-color));
+}
+.css-xaw41p-MuiToggleButtonGroup-root{
+    margin-bottom: 10px !important;
 }

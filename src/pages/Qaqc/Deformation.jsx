@@ -1,45 +1,82 @@
 import React, { useEffect, useState } from 'react';
 
-import { ToggleButtonGroup, ToggleButton } from '@mui/material';
+import ButtonGroup from '../../components/buttongroup/ButtonGroup';
 
-import '../../components/buttongroup/buttongroup.css';
+function DeformationMonitor() {
+	return (
+		<>
+			<div className="row">
+				<div className="col-6">
+					<div className="row">
+						<div className="col-6">
+							<div className="card">
+								<div className="card__header">
+									<h3>Data 1</h3>
+								</div>
+								<div className="card__body">Data 1 goes here</div>
+							</div>
+						</div>
+						<div className="col-6">
+							<div className="card">
+								<div className="card__header">
+									<h3>Data 2</h3>
+								</div>
+								<div className="card__body">Data 2 goes here</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="col-6">
+					<div className="row">
+						<div className="col-6">
+							<div className="card">
+								<div className="card__header">
+									<h3>Data 3</h3>
+								</div>
+								<div className="card__body">Data 3 goes here</div>
+							</div>
+						</div>
+						<div className="col-6">
+							<div className="card">
+								<div className="card__header">
+									<h3>Data 4</h3>
+								</div>
+								<div className="card__body">Data 4 goes here</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="row">
+				<div className="col-12">
+					<div className="card">
+						<div className="card__header">
+							<h3>Crucial Data</h3>
+						</div>
+						<div className="card__body">Very very crucial data</div>
+					</div>
+				</div>
+			</div>
+		</>
+	);
+}
 
 function Deformation() {
 	// const themeReducer = useSelector(state => state.theme);
 	const [alignment, setAlignment] = useState('monitor');
-	const [showMonitor, setShowMonitor] = useState(true);
-	const [showReport, setShowReport] = useState(false);
 	useEffect(() => {
 		document.title = 'Deformation | SCADA';
 	}, []);
 	const handleChange = (event, newAlignment) => {
 		setAlignment(newAlignment);
-		setShowMonitor(!showMonitor);
-		setShowReport(!showReport);
 	};
 	return (
 		<div>
 			<h2 className="page-header">Deformation</h2>
 			<div>
-				<ToggleButtonGroup
-					sx={{
-						'& .MuiButtonBase-root': {
-							color: 'var(--txt-color)',
-						},
-						'& .Mui-selected': {
-							backgroundColor: 'var(--main-color)',
-						},
-					}}
-					color="primary"
-					exclusive
-					value={alignment}
-					onChange={handleChange}
-				>
-					<ToggleButton value="monitor">Monitor</ToggleButton>
-					<ToggleButton value="report">Report</ToggleButton>
-				</ToggleButtonGroup>
-				{showReport && <div>Report goes here</div>}
-				{showMonitor && <div>Monitor goes here</div>}
+				<ButtonGroup alignment={alignment} handleChange={handleChange} />
+				{alignment === 'report' && <div>Report goes here</div>}
+				{alignment === 'monitor' && <DeformationMonitor />}
 			</div>
 		</div>
 	);

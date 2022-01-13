@@ -207,7 +207,6 @@ const Dashboard = () => {
 								renderBody={renderCustomerBody}
 								renderHead={renderCustomerHeader}
 							/>
-							{/* table */}
 						</div>
 						<div className="card__footer">
 							<Link to="/warehouse">view all</Link>

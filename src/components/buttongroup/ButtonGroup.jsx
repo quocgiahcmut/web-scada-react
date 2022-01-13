@@ -4,7 +4,7 @@ import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 
 import './buttongroup.css';
 
-function ButtonGroup({alignment, handleChange}) {
+function ButtonGroup({ alignment, handleChange }) {
 	return (
 		<ToggleButtonGroup
 			sx={{
@@ -19,6 +19,7 @@ function ButtonGroup({alignment, handleChange}) {
 			exclusive
 			value={alignment}
 			onChange={handleChange}
+			fullWidth
 		>
 			<ToggleButton value="monitor">Monitor</ToggleButton>
 			<ToggleButton value="report">Report</ToggleButton>

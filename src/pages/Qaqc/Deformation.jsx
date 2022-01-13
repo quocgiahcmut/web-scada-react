@@ -2,7 +2,16 @@ import React, { useEffect, useState } from 'react';
 
 import ButtonGroup from '../../components/buttongroup/ButtonGroup';
 
+import CircularProgress from '../../components/circularprogress/CircularProgress';
+
 function DeformationMonitor() {
+	const [value, setValue] = useState(74);
+	// useEffect(() => {
+	// 	const interval = setInterval(() => {
+	// 		setValue((prev) => prev + 1);
+	// 	}, 1000);
+	// 	return () => clearInterval(interval);
+	// }, []);
 	return (
 		<>
 			<div className="row">
@@ -13,7 +22,9 @@ function DeformationMonitor() {
 								<div className="card__header">
 									<h3>Data 1</h3>
 								</div>
-								<div className="card__body">Data 1 goes here</div>
+								<div className="card__body">
+									<CircularProgress score={value}></CircularProgress>
+								</div>
 							</div>
 						</div>
 						<div className="col-6">

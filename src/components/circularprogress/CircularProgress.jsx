@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { CircularProgressbar } from 'react-circular-progressbar';
+import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 
 const ReviewsProvider = ({ valueStart, valueEnd, children }) => {
 	const [value, setValue] = useState(valueStart);
@@ -24,28 +24,33 @@ function CircularProgress(props) {
 	return (
 		<ReviewsProvider valueStart={0} valueEnd={score}>
 			{(value) => (
-				<CircularProgressbar
+				<CircularProgressbarWithChildren
+					strokeWidth={10}
 					value={value}
-					text={`${value} %`}
 					circleRatio={0.7} /* Make the circle only 0.7 of the full diameter */
 					styles={{
 						trail: {
-							strokeLinecap: 'butt',
+							stroke: '#FFF',
+							strokeLinecap: 'round',
 							transform: 'rotate(-126deg)',
 							transformOrigin: 'center center',
 						},
 						path: {
-							strokeLinecap: 'butt',
+							strokeLinecap: 'round',
 							transform: 'rotate(-126deg)',
 							transformOrigin: 'center center',
 							stroke: calcColor(value, 0, 120),
-						},
-						text: {
-							fill: '#ddd',
+							transition: 'stroke-dashoffset 0.5s ease 0s',
 						},
 					}}
-					strokeWidth={10}
-				/>
+				>
+					<strong
+						style={{
+							fontSize: 40,
+							color: 'var(--txt-color)',
+						}}
+					>{`${value}`}</strong>
+				</CircularProgressbarWithChildren>
 			)}
 		</ReviewsProvider>
 	);

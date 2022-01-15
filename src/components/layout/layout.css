@@ -6,7 +6,7 @@
   padding-left: var(--sidebar-width);
   background-color: var(--second-bg);
   min-height: 100vh;
-  transition: all 0.5s var(--transition-cubic) 0s;
+  transition: all 0.3s linear 0s;
 }
 .layout__content-main {
   padding: 30px;

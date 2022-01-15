@@ -73,6 +73,7 @@ ul {
     list-style-type: none;
 }
 
+
 input {
     border: 2px solid transparent;
     outline: 0;
@@ -105,17 +106,37 @@ input:focus {
 
 .card__header {
     text-transform: capitalize;
+    display: flex;
+    align-content: center;
+    transform: translateY(-4px);
+}
+.card__header > img {
+    width: 22px;
+    height: auto;
+    margin-left: 5px;
 }
 
 .card > div ~ div {
     margin-top: 30px;
 }
 
+.card.card--monitor {
+    height: 340px;
+}
 .card__footer {
     text-align: center;
     text-transform: capitalize;
 }
 
+.card__body{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.card__body > img {
+    width: 60%;
+    height: auto;
+}
 .light-background {
     background-color: var(--main-bg-light);
     color: #000;

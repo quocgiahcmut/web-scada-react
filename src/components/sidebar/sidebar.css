@@ -15,7 +15,7 @@
   top: 0;
   background-color:var(--main-bg);
   box-shadow: var(--box-shadow);
-  transition: all 0.5s var(--transition-cubic) 0s;
+  transition: all 0.3s linear 0s;
 }
 
 .sidebar__btn{
@@ -123,9 +123,6 @@ i>span>i{
   font-weight: 400;
   transition: color .3s ease 0s;
 }
-.sidebar__item--inner-sub > a {
-  padding-bottom: 5px;
-}
 .sidebar__item--inner-sub > a > span {
   font-size: 1rem;
 }
@@ -167,5 +164,7 @@ i>span>i{
   color: var(--txt-white);
 }
 .sidebar__item--sub-container{
-  padding: 7px 20px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
 }

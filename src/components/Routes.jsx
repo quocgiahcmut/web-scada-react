@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Customers from '../pages/Warehouse';
 import Dashboard from '../pages/Dashboard';
-import QaqcDepartment from '../pages/Qaqc/QaqcDepartment';
+import QaqcDepartment from '../pages/qaqc/QaqcDepartment';
 
 const Routes = () => {
 	return (

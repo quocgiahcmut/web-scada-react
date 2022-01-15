@@ -4,7 +4,7 @@
 
 table{
   width: 100%;
-  min-width: 400px;
+  min-width:400px;
   border-spacing: 0;
 }
 
@@ -21,9 +21,5 @@ th,td {
   padding: 15px 10px;
 }
 
-tbody > tr:hover{
-  background-color: var(--main-color);
-  color: var(--txt-white);
-}
  
   

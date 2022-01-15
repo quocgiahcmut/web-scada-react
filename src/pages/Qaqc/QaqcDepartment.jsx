@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Route, Switch } from 'react-router-dom';
 
-import Deformation from './Deformation';
+import Deformation from './deformation/Deformation';
 
 import ForcedEndurance from './ForcedEndurance';
 

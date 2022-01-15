@@ -128,15 +128,6 @@ input:focus {
     text-transform: capitalize;
 }
 
-.card__body{
-    display: flex;
-    align-content: center;
-    justify-content: center;
-}
-.card__body > img {
-    width: 60%;
-    height: auto;
-}
 .light-background {
     background-color: var(--main-bg-light);
     color: #000;

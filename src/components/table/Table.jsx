@@ -4,7 +4,7 @@ import './table.css';
 
 function Table(props) {
 	return (
-		<div>
+		<>
 			<div className="table-wrapper">
 				<table>
 					{props.headData && props.renderHead ? (
@@ -17,7 +17,7 @@ function Table(props) {
 					) : null}
 				</table>
 			</div>
-		</div>
+		</>
 	);
 }
 

@@ -1,0 +1,10 @@
+td{
+  color: var(--txt-color) !important;
+}
+.card__body--flex{
+  width: 100%;
+}
+.card__body--flex > img {
+    width: 50%;
+    transform: translate(50%);
+}

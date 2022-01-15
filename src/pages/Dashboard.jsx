@@ -158,8 +158,8 @@ const renderOrderBody = (item, index) => {
 const Dashboard = () => {
 	const themeReducer = useSelector((state) => state.theme.mode);
 	useEffect(() => {
-			document.title='Dashboard | SCADA'
-	},[])
+		document.title = 'Dashboard | SCADA';
+	}, []);
 	return (
 		<div>
 			<h2 className="page-header">Dashboard</h2>

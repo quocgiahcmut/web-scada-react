@@ -6,6 +6,12 @@
         "subNav":[]
     },
     {
+        "display_name": "Overview",
+        "route": "/overview",
+        "icon": "bx bx-task",
+        "subNav":[]
+    },
+    {
         "display_name": "Warehouse",
         "route": "/warehouse",
         "icon": "bx bx-user-pin",

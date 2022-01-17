@@ -85,6 +85,7 @@ input:focus {
 
 .page-header {
     margin-bottom: 20px;
+    margin-right: 20px;
     text-transform: capitalize;
 }
 

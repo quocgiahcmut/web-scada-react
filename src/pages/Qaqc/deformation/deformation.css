@@ -10,6 +10,6 @@ td{
   width: 100%;
 }
 .card__body--flex > img {
-    width: 50%;
-    transform: translate(50%);
+  width: 40%;
+  transform: translate(80%);
 }

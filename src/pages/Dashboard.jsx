@@ -169,31 +169,35 @@ const Dashboard = () => {
 						{statusCards.map((item, index) => {
 							return (
 								<div key={index} className="col-6">
-									<StatusCard icon={item.icon} count={item.count} title={item.title} />
+									<Link to={item.path}>
+										<StatusCard icon={item.icon} count={item.count} title={item.title} />
+									</Link>
 								</div>
 							);
 						})}
 					</div>
 				</div>
 				<div className="col-6">
-					<div className="card full-height">
-						<Chart
-							options={
-								themeReducer === 'theme-mode-dark'
-									? {
-											...chartOptions.options,
-											theme: { mode: 'dark' },
-									  }
-									: {
-											...chartOptions.options,
-											theme: { mode: 'light' },
-									  }
-							}
-							series={chartOptions.series}
-							type="line"
-							height="100%"
-						/>
-					</div>
+					<Link to="/qa-qc/deformation">
+						<div className="card full-height">
+							<Chart
+								options={
+									themeReducer === 'theme-mode-dark'
+										? {
+												...chartOptions.options,
+												theme: { mode: 'dark' },
+										  }
+										: {
+												...chartOptions.options,
+												theme: { mode: 'light' },
+										  }
+								}
+								series={chartOptions.series}
+								type="line"
+								height="100%"
+							/>
+						</div>
+					</Link>
 				</div>
 				<div className="col-5">
 					<div className="card">

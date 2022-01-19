@@ -27,6 +27,7 @@ import {
 } from '@mui/material';
 import './deformation.css';
 import connection from '../../../api/signalR';
+import ButtonGroup from '../../../components/buttongroup/ButtonGroup';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -45,12 +46,7 @@ function createData(params, process) {
 	};
 }
 
-const rows = [
-	createData('Bài test', 1),
-	createData('Lực nhấn', 727),
-	createData('Số lần nhấn', 612),
-	createData('Thời gian giữ', 100),
-];
+const rows = [createData('Lực nhấn', 727), createData('Số lần nhấn', 612), createData('Thời gian giữ', 100)];
 
 var velocityChartOptions = {
 	series: [70],
@@ -194,6 +190,7 @@ function StyledPaper({ children }) {
 }
 
 function DeformationMonitorSystem1() {
+	const [alignment, setAlignment] = useState('monitor');
 	const [machineState, setMachineState] = useState(state.auto);
 	const [isShowLed, setIsShowLed] = useState(true);
 	const [signalRConnection, setSignalRConnection] = useState(null);
@@ -204,119 +201,131 @@ function DeformationMonitorSystem1() {
 	useEffect(() => {
 		setSignalRConnection(connection);
 	}, []);
+
+	const handleChange = (event, newAlignment) => {
+		setAlignment(newAlignment);
+	};
 	return (
 		<>
-			<div className="row">
-				<div className="col-7">
-					<div className="card">
-						<div className="card__header">
-							<h3>Thông số cài đặt</h3>
-						</div>
-						<div className="card__body">
-							<ThemeProvider
-								theme={
-									themeReducer.mode === 'theme-mode-dark'
-										? createTheme({
-												palette: {
-													mode: 'dark',
-												},
-										  })
-										: createTheme({
-												palette: { mode: 'light' },
-										  })
-								}
-							>
-								<TableContainer component={StyledPaper}>
-									<Table sx={{ minWidth: 600 }} aria-label="customized table">
-										<TableHead>
-											<TableRow>
-												<StyledTableCell align="left">Thông số của máy</StyledTableCell>
-												<StyledTableCell align="left">Hệ số cài đặt</StyledTableCell>
-											</TableRow>
-										</TableHead>
-										<TableBody>
-											{rows.map((row) => (
-												<TableRow key={row.params}>
-													<StyledTableCell align="left">{row.params}</StyledTableCell>
-													<StyledTableCell align="left">{row.process}</StyledTableCell>
-												</TableRow>
-											))}
-										</TableBody>
-									</Table>
-								</TableContainer>
-							</ThemeProvider>
-						</div>
-					</div>
-				</div>
-				<div className="col-5">
-					<div className="card full-height">
-						<div className="card__header">
-							<h3>Trạng thái máy</h3>
-							{ledRef}
-						</div>
-						<div className="card__body">
-							<div className="card__body--flex">
-								<img src={machineState} alt="Trang thai may" />
+			<div>
+				<ButtonGroup alignment={alignment} handleChange={handleChange} />
+				{alignment === 'report' && <div>Report goes here</div>}
+				{alignment === 'monitor' && (
+					<>
+						<div className="row">
+							<div className="col-7">
+								<div className="card ">
+									<div className="card__header">
+										<h3>Thông số cài đặt</h3>
+									</div>
+									<div className="card__body">
+										<ThemeProvider
+											theme={
+												themeReducer.mode === 'theme-mode-dark'
+													? createTheme({
+															palette: {
+																mode: 'dark',
+															},
+													  })
+													: createTheme({
+															palette: { mode: 'light' },
+													  })
+											}
+										>
+											<TableContainer component={StyledPaper}>
+												<Table sx={{ minWidth: 600 }} aria-label="customized table">
+													<TableHead>
+														<TableRow>
+															<StyledTableCell align="left">Thông số của máy</StyledTableCell>
+															<StyledTableCell align="left">Hệ số cài đặt</StyledTableCell>
+														</TableRow>
+													</TableHead>
+													<TableBody>
+														{rows.map((row) => (
+															<TableRow key={row.params}>
+																<StyledTableCell align="left">{row.params}</StyledTableCell>
+																<StyledTableCell align="left">{row.process}</StyledTableCell>
+															</TableRow>
+														))}
+													</TableBody>
+												</Table>
+											</TableContainer>
+										</ThemeProvider>
+									</div>
+								</div>
+							</div>
+							<div className="col-5">
+								<div className="card full-height">
+									<div className="card__header">
+										<h3>Trạng thái máy</h3>
+										{ledRef}
+									</div>
+									<div className="card__body">
+										<div className="card__body--flex">
+											<img src={machineState} alt="Trang thai may" />
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-			<div className="row">
-				<div className="col-4 ">
-					<div className="card full-height">
-						<div className="card__header">
-							<h3>Lực nhấn</h3>
-							{ledRef}
+						<div className="row">
+							<div className="col-4 ">
+								<div className="card full-height">
+									<div className="card__header">
+										<h3>Lực nhấn</h3>
+										{ledRef}
+									</div>
+									<div className="card__body">
+										<Chart
+											options={{
+												...radialBarOptions.options,
+												theme: { mode: 'light' },
+											}}
+											series={radialBarOptions.series}
+											type="radialBar"
+											height="auto"
+										/>
+									</div>
+								</div>
+							</div>
+							<div className="col-4">
+								<div className="card full-height">
+									<div className="card__header">
+										<h3>Số lần nhấn</h3>
+										{ledRef}
+									</div>
+									<div className="card__body">
+										<Chart
+											options={{
+												...radialBarOptions.options,
+												theme: { mode: 'light' },
+											}}
+											series={[30]}
+											type="radialBar"
+											height="auto"
+										/>
+									</div>
+								</div>
+							</div>
+							<div className="col-4">
+								<div className="card full-height">
+									<div className="card__header">
+										<h3>Thời gian giữ</h3>
+										{ledRef}
+									</div>
+									<div className="card__body">
+										<Chart
+											options={{ ...velocityChartOptions.options, theme: { mode: 'light' } }}
+											series={velocityChartOptions.series}
+											type="radialBar"
+											height="auto"
+										/>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div className="card__body">
-							<Chart
-								options={{
-									...radialBarOptions.options,
-									theme: { mode: 'light' },
-								}}
-								series={radialBarOptions.series}
-								type="radialBar"
-								height="auto"
-							/>
-						</div>
-					</div>
-				</div>
-				<div className="col-4">
-					<div className="card full-height">
-						<div className="card__header">
-							<h3>Số lần nhấn</h3>
-							{ledRef}
-						</div>
-						<div className="card__body">
-							<Chart
-								options={{
-									...radialBarOptions.options,
-									theme: { mode: 'light' },
-								}}
-								series={[30]}
-								type="radialBar"
-								height="auto"
-							/>
-						</div>
-					</div>
-				</div>
-				<div className="col-4">
-					<div className="card full-height">
-						<div className="card__header">
-							<h3>Thời gian giữ</h3>
-							{ledRef}
-						</div>
-						<div className="card__body">
-							<Chart
-								options={{ ...velocityChartOptions.options, theme: { mode: 'light' } }}
-								series={velocityChartOptions.series}
-								type="radialBar"
-								height="auto"
-							/>
-						</div>
-					</div>
-				</div>
+					</>
+				)}
 			</div>
 		</>
 	);

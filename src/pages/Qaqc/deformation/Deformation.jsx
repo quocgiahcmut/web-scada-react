@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from 'react';
 
-import ButtonGroup from '../../../components/buttongroup/ButtonGroup';
-
 import { MenuItem, FormControl, Select } from '@mui/material';
 import './deformation.css';
 import DeformationMonitorSystem1 from './SystemOne';
+import DeformationMonitorSystem2 from './SystemTwo';
 
 function Deformation() {
-	const [alignment, setAlignment] = useState('monitor');
 	const [system, setSystem] = useState(1);
 
 	const handleClick = (e) => {
-		console.log(e.target.value);
 		setSystem(e.target.value);
 	};
 	useEffect(() => {
 		document.title = 'Deformation | SCADA';
 	}, []);
-	const handleChange = (event, newAlignment) => {
-		setAlignment(newAlignment);
-	};
+
 	return (
 		<div>
 			<div className="page-header-container">
@@ -55,11 +50,7 @@ function Deformation() {
 					</Select>
 				</FormControl>
 			</div>
-			<div>
-				<ButtonGroup alignment={alignment} handleChange={handleChange} />
-				{alignment === 'report' && <div>Report goes here</div>}
-				{alignment === 'monitor' && <DeformationMonitorSystem1 />}
-			</div>
+			{system === 1 ? <DeformationMonitorSystem1 /> : <DeformationMonitorSystem2 />}
 		</div>
 	);
 }

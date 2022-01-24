@@ -217,16 +217,15 @@ function DeformationMonitorSystem1() {
 				.start()
 				.then(() => {
 					connection.on('ReceiveMessage', (message) => {
-						console.log(message);
-						// set states here
+						// Set states here from data @return {message: any}
 					});
 					connection.on('ReceiveAnotherMessage', (message) => {
 						console.log(message);
-						// set states here
+						// Set states here from data @return {message: any}
 					});
 					connection.on('ReceiveLastMessage', (message) => {
 						console.log(message);
-						// set states here
+						// Set states here from data @return {message: any}
 					});
 				})
 				.catch((error) => console.log(error));

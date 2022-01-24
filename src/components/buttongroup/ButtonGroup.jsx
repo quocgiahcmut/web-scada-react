@@ -12,12 +12,17 @@ function ButtonGroup({ alignment, handleChange }) {
 				'& .MuiButtonBase-root': {
 					color: 'var(--txt-color)',
 				},
-				'& .MuiButtonBase-root:selected': {
-					backgroundColor: 'var(--main-color)',
-				},
-				'& .Mui-selected': {
+				'& .MuiButtonBase-root.Mui-selected': {
 					backgroundColor: 'var(--main-color)',
 					color: 'var(--txt-white)',
+				},
+				'& .MuiButtonBase-root.Mui-selected:hover': {
+					backgroundColor: 'var(--main-color)',
+					color: 'var(--txt-white)',
+				},
+				'& .MuiButtonBase-root:hover': {
+					color: 'var(--txt-white)',
+					backgroundColor: 'var(--second-color)',
 				},
 			}}
 			color="primary"

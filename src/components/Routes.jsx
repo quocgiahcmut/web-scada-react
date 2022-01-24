@@ -5,7 +5,7 @@ import { AuthProvider, UserManager } from 'oidc-react';
 import { WebStorageStateStore } from 'oidc-client';
 import Customers from '../pages/Warehouse';
 import Dashboard from '../pages/Dashboard';
-import QaqcDepartment from '../pages/qaqc/QaqcDepartment';
+import { QaQc } from '../pages/qaqc/index';
 
 const userManager = new UserManager({
 	userStore: new WebStorageStateStore({ store: window.localStorage }),
@@ -34,7 +34,7 @@ const Routes = () => {
 		<Switch>
 			<Route path="/" exact component={Dashboard} />
 			<Route path="/warehouse" component={Customers} />
-			<Route path="/qa-qc" component={QaqcDepartment} />
+			<Route path="/qa-qc" component={QaQc} />
 		</Switch>
 		// </AuthProvider>
 	);

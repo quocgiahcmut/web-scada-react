@@ -6,7 +6,7 @@ import manual from '../../../assets/images/manual.PNG';
 
 import emergency from '../../../assets/images/stop.PNG';
 
-import led from '../../../assets/images/led.png';
+import led from '../../../assets/images/led.svg';
 
 import { useSelector } from 'react-redux';
 
@@ -40,10 +40,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	},
 }));
 
-function createData(params, process) {
+function createData(params, process2, process3) {
 	return {
 		params,
-		process,
+		process2,
+		process3,
 	};
 }
 
@@ -60,13 +61,13 @@ var velocityChartOptions = {
 				endAngle: 135,
 				dataLabels: {
 					name: {
-						fontSize: '16px',
+						fontSize: '12px',
 						color: undefined,
-						offsetY: 120,
+						offsetY: 60,
 					},
 					value: {
-						offsetY: 76,
-						fontSize: '22px',
+						offsetY: 30,
+						fontSize: '10px',
 						color: 'var(--txt-color)',
 						fontWeight: 'bold',
 						formatter: function (val) {
@@ -141,15 +142,16 @@ var radialBarOptions = {
 						offsetY: -10,
 						show: true,
 						color: 'var(--main-color)',
-						fontSize: '20px',
+						fontSize: '12px',
 						fontWeight: 'bold',
 					},
 					value: {
 						formatter: function (val) {
 							return parseInt(val) * 10;
 						},
+						offsetY: '0',
 						color: 'var(--txt-color)',
-						fontSize: '22px',
+						fontSize: '10px',
 						fontWeight: 'bold',
 						show: true,
 					},
@@ -189,14 +191,20 @@ function StyledPaper({ children }) {
 
 function DeformationMonitorSystem2() {
 	const [params, setParams] = useState({
-		force: 0,
-		numbs: 0,
-		time: 70,
+		force2: 0,
+		numbs2: 0,
+		time2: 0,
+		force3: 0,
+		numbs3: 0,
+		time3: 0,
 	});
 	const [settings, setSettings] = useState({
-		force: 0,
-		numbs: 0,
-		time: 0,
+		force2: 0,
+		numbs2: 0,
+		time2: 0,
+		force3: 0,
+		numbs3: 0,
+		time3: 0,
 	});
 	const [alignment, setAlignment] = useState('monitor');
 	const [machineState, setMachineState] = useState(state.auto);
@@ -206,7 +214,6 @@ function DeformationMonitorSystem2() {
 	const themeReducer = useSelector((state) => state.theme);
 	const active = sideBarReducer.active;
 	const ledRef = isShowLed && <img src={led} alt="led" className={active} />;
-
 	useEffect(() => {
 		setSignalRConnection(connection);
 	}, []);
@@ -216,13 +223,25 @@ function DeformationMonitorSystem2() {
 			signalRConnection
 				.start()
 				.then(() => {
-					connection.on('ReceiveMessage', (message) => {
+					connection.on('DeformationSystem2Monitor', (message) => {
 						console.log(message);
+
+						// UPDATE STATE AFTER RECEIVING DATA FROM HUB VIA CONNECTION
+						setParams({
+							force2: message.forceCylinder2,
+							numbs2: message.pressingNumberCylinder2,
+							time2: message.holdingTimeCylinder2,
+							force3: message.forceCylinder3,
+							numbs3: message.pressingNumberCylinder3,
+							time3: message.holdingTimeCylinder3,
+						});
+						setMachineState(message.stateSystem2);
 					});
 				})
 				.catch((error) => console.log(error));
 		}
 		return () => {
+			// REMEMBER TO UNCOMMENT THIS
 			// signalRConnection.stop();
 		};
 	}, [signalRConnection]);
@@ -232,9 +251,9 @@ function DeformationMonitorSystem2() {
 	};
 
 	const rows = [
-		createData('Lực nhấn', settings.force),
-		createData('Số lần nhấn', settings.numbs),
-		createData('Thời gian giữ', settings.time),
+		createData('Lực nhấn', settings.force2, settings.force3),
+		createData('Số lần nhấn', settings.numbs2, settings.numbs3),
+		createData('Thời gian giữ', settings.time2, settings.time3),
 	];
 
 	return (
@@ -269,14 +288,16 @@ function DeformationMonitorSystem2() {
 													<TableHead>
 														<TableRow>
 															<StyledTableCell align="left">Thông số của máy</StyledTableCell>
-															<StyledTableCell align="left">Hệ số cài đặt</StyledTableCell>
+															<StyledTableCell align="left">Xi lanh 2</StyledTableCell>
+															<StyledTableCell align="left">Xi lanh 3</StyledTableCell>
 														</TableRow>
 													</TableHead>
 													<TableBody>
 														{rows.map((row) => (
 															<TableRow key={row.params}>
 																<StyledTableCell align="left">{row.params}</StyledTableCell>
-																<StyledTableCell align="left">{row.process}</StyledTableCell>
+																<StyledTableCell align="left">{row.process2}</StyledTableCell>
+																<StyledTableCell align="left">{row.process3}</StyledTableCell>
 															</TableRow>
 														))}
 													</TableBody>
@@ -300,63 +321,278 @@ function DeformationMonitorSystem2() {
 								</div>
 							</div>
 						</div>
-						<div className="row">
-							<div className="col-4 ">
-								<div className="card full-height">
-									<div className="card__header">
-										<h3>Lực nhấn</h3>
-										{ledRef}
+						{active === 'active' ? (
+							<>
+								<div className="row">
+									<div className="col-2">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Lực nhấn</h3>
+													<p>Xi lanh 2</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{
+														...radialBarOptions.options,
+														theme: { mode: 'light' },
+													}}
+													series={[params.force2]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
 									</div>
-									<div className="card__body">
-										<Chart
-											options={{
-												...radialBarOptions.options,
-												theme: { mode: 'light' },
-											}}
-											series={[params.force]}
-											type="radialBar"
-											height="auto"
-										/>
+									<div className="col-2">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Số lần nhấn</h3>
+													<p>Xi lanh 2</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{
+														...radialBarOptions.options,
+														theme: { mode: 'light' },
+														labels: ['Times'],
+													}}
+													series={[params.numbs2]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
+									</div>
+									<div className="col-2">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Thời gian giữ</h3>
+													<p>Xi lanh 2</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{
+														...velocityChartOptions.options,
+														theme: { mode: 'light' },
+													}}
+													series={[params.time2]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
+									</div>
+									<div className="col-2">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Lực nhấn</h3>
+													<p>Xi lanh 3</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{
+														...radialBarOptions.options,
+														theme: { mode: 'light' },
+													}}
+													series={[params.force3]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
+									</div>
+									<div className="col-2">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Số lần nhấn</h3>
+													<p>Xi lanh 3</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{
+														...radialBarOptions.options,
+														theme: { mode: 'light' },
+														labels: ['Times'],
+													}}
+													series={[params.numbs3]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
+									</div>
+									<div className="col-2">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Thời gian giữ</h3>
+													<p>Xi lanh 3</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{ ...velocityChartOptions.options, theme: { mode: 'light' } }}
+													series={[params.time3]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div className="col-4">
-								<div className="card full-height">
-									<div className="card__header">
-										<h3>Số lần nhấn</h3>
-										{ledRef}
+							</>
+						) : (
+							<>
+								<div className="row">
+									<div className="col-4">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Lực nhấn</h3>
+													<p>Xi lanh 2</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{
+														...radialBarOptions.options,
+														theme: { mode: 'light' },
+													}}
+													series={[params.force2]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
 									</div>
-									<div className="card__body">
-										<Chart
-											options={{
-												...radialBarOptions.options,
-												theme: { mode: 'light' },
-												labels: ['Times'],
-											}}
-											series={[params.numbs]}
-											type="radialBar"
-											height="auto"
-										/>
+									<div className="col-4">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Số lần nhấn</h3>
+													<p>Xi lanh 2</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{
+														...radialBarOptions.options,
+														theme: { mode: 'light' },
+														labels: ['Times'],
+													}}
+													series={[params.numbs2]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
+									</div>
+									<div className="col-4">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Thời gian giữ</h3>
+													<p>Xi lanh 2</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{ ...velocityChartOptions.options, theme: { mode: 'light' } }}
+													series={[params.time2]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div className="col-4">
-								<div className="card full-height">
-									<div className="card__header">
-										<h3>Thời gian giữ</h3>
-										{ledRef}
+								<div className="row">
+									<div className="col-4">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Lực nhấn</h3>
+													<p>Xi lanh 3</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{
+														...radialBarOptions.options,
+														theme: { mode: 'light' },
+													}}
+													series={[params.force3]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
 									</div>
-									<div className="card__body">
-										<Chart
-											options={{ ...velocityChartOptions.options, theme: { mode: 'light' } }}
-											series={[params.time]}
-											type="radialBar"
-											height="auto"
-										/>
+									<div className="col-4">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Số lần nhấn</h3>
+													<p>Xi lanh 3</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{
+														...radialBarOptions.options,
+														theme: { mode: 'light' },
+														labels: ['Times'],
+													}}
+													series={[params.numbs3]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
+									</div>
+									<div className="col-4">
+										<div className="card full-height">
+											<div className="card__header">
+												<div>
+													<h3>Thời gian giữ</h3>
+													<p>Xi lanh 3</p>
+												</div>
+												{ledRef}
+											</div>
+											<div className="card__body">
+												<Chart
+													options={{ ...velocityChartOptions.options, theme: { mode: 'light' } }}
+													series={[params.time3]}
+													type="radialBar"
+													height="auto"
+												/>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div>
+							</>
+						)}
 					</>
 				)}
 			</div>

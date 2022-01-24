@@ -191,7 +191,7 @@ function DeformationMonitorSystem1() {
 	const [params, setParams] = useState({
 		force: 0,
 		numbs: 0,
-		time: 70,
+		time: 0,
 	});
 	const [settings, setSettings] = useState({
 		force: 0,
@@ -216,21 +216,22 @@ function DeformationMonitorSystem1() {
 			signalRConnection
 				.start()
 				.then(() => {
-					connection.on('ReceiveMessage', (message) => {
-						// Set states here from data @return {message: any}
-					});
-					connection.on('ReceiveAnotherMessage', (message) => {
+					connection.on('DeformationSystem1Monitor', (message) => {
 						console.log(message);
-						// Set states here from data @return {message: any}
-					});
-					connection.on('ReceiveLastMessage', (message) => {
-						console.log(message);
-						// Set states here from data @return {message: any}
+
+						// UPDATE STATE AFTER RECEIVING DATA FROM HUB VIA CONNECTION
+						setParams({
+							force: message.forceCylinder1,
+							numbs: message.pressingNumberCylinder1,
+							time: message.holdingTimeCylinder1,
+						});
+						setMachineState(message.stateSystem1);
 					});
 				})
 				.catch((error) => console.log(error));
 		}
 		return () => {
+			// REMEMBER TO UNCOMMENT THIS
 			// signalRConnection.stop();
 		};
 	}, [signalRConnection]);
@@ -277,7 +278,7 @@ function DeformationMonitorSystem1() {
 													<TableHead>
 														<TableRow>
 															<StyledTableCell align="left">Thông số của máy</StyledTableCell>
-															<StyledTableCell align="left">Hệ số cài đặt</StyledTableCell>
+															<StyledTableCell align="left">Xi lanh 1</StyledTableCell>
 														</TableRow>
 													</TableHead>
 													<TableBody>

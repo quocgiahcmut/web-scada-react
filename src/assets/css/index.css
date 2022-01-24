@@ -109,6 +109,7 @@ input:focus {
     text-transform: capitalize;
     display: flex;
     align-content: center;
+    justify-content: space-between;
     transform: translateY(-4px);
 }
 .card__header > img {

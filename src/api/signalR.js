@@ -1,7 +1,8 @@
 import { HubConnectionBuilder, JsonHubProtocol } from '@microsoft/signalr';
 
 const connection = new HubConnectionBuilder()
-	.withUrl('https://example.com')
+	//add domain hub here
+	.withUrl('https://example.com/hub')
 	.withHubProtocol(new JsonHubProtocol())
 	.withAutomaticReconnect([0, 10, 10000])
 	.build();

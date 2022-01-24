@@ -31,11 +31,11 @@ const Routes = () => {
 		// 		console.log(e);
 		// 	}}
 		// >
-			<Switch>
-				<Route path="/" exact component={Dashboard} />
-				<Route path="/warehouse" component={Customers} />
-				<Route path="/qa-qc" component={QaqcDepartment} />
-			</Switch>
+		<Switch>
+			<Route path="/" exact component={Dashboard} />
+			<Route path="/warehouse" component={Customers} />
+			<Route path="/qa-qc" component={QaqcDepartment} />
+		</Switch>
 		// </AuthProvider>
 	);
 };

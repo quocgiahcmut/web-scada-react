@@ -29,6 +29,7 @@ import './deformation.css';
 import connection from '../../../api/signalR';
 import ButtonGroup from '../../../components/buttongroup/ButtonGroup';
 
+// --------------------------SETTINGS OPTIONS---------------------------
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
 		backgroundImage: 'linear-gradient(var(--main-color), var(--second-color));',
@@ -46,10 +47,7 @@ function createData(params, process) {
 	};
 }
 
-const rows = [createData('Lực nhấn', 727), createData('Số lần nhấn', 612), createData('Thời gian giữ', 100)];
-
 var velocityChartOptions = {
-	series: [70],
 	options: {
 		chart: {
 			height: 350,
@@ -97,7 +95,6 @@ var velocityChartOptions = {
 };
 
 var radialBarOptions = {
-	series: [75],
 	options: {
 		chart: {
 			type: 'radialBar',
@@ -149,7 +146,7 @@ var radialBarOptions = {
 					},
 					value: {
 						formatter: function (val) {
-							return parseInt(val);
+							return parseInt(val) * 10;
 						},
 						color: 'var(--txt-color)',
 						fontSize: '22px',
@@ -175,7 +172,7 @@ var radialBarOptions = {
 		stroke: {
 			lineCap: 'round',
 		},
-		labels: ['Percent'],
+		labels: ['Newton'],
 	},
 };
 
@@ -188,8 +185,19 @@ const state = {
 function StyledPaper({ children }) {
 	return <Paper elevation={6}>{children}</Paper>;
 }
+// --------------------------------------------------------------------
 
 function DeformationMonitorSystem2() {
+	const [params, setParams] = useState({
+		force: 0,
+		numbs: 0,
+		time: 70,
+	});
+	const [settings, setSettings] = useState({
+		force: 0,
+		numbs: 0,
+		time: 0,
+	});
 	const [alignment, setAlignment] = useState('monitor');
 	const [machineState, setMachineState] = useState(state.auto);
 	const [isShowLed, setIsShowLed] = useState(true);
@@ -198,13 +206,37 @@ function DeformationMonitorSystem2() {
 	const themeReducer = useSelector((state) => state.theme);
 	const active = sideBarReducer.active;
 	const ledRef = isShowLed && <img src={led} alt="led" className={active} />;
+
 	useEffect(() => {
 		setSignalRConnection(connection);
 	}, []);
 
+	useEffect(() => {
+		if (signalRConnection) {
+			signalRConnection
+				.start()
+				.then(() => {
+					connection.on('ReceiveMessage', (message) => {
+						console.log(message);
+					});
+				})
+				.catch((error) => console.log(error));
+		}
+		return () => {
+			// signalRConnection.stop();
+		};
+	}, [signalRConnection]);
+
 	const handleChange = (event, newAlignment) => {
 		setAlignment(newAlignment);
 	};
+
+	const rows = [
+		createData('Lực nhấn', settings.force),
+		createData('Số lần nhấn', settings.numbs),
+		createData('Thời gian giữ', settings.time),
+	];
+
 	return (
 		<>
 			<div>
@@ -281,7 +313,7 @@ function DeformationMonitorSystem2() {
 												...radialBarOptions.options,
 												theme: { mode: 'light' },
 											}}
-											series={radialBarOptions.series}
+											series={[params.force]}
 											type="radialBar"
 											height="auto"
 										/>
@@ -299,8 +331,9 @@ function DeformationMonitorSystem2() {
 											options={{
 												...radialBarOptions.options,
 												theme: { mode: 'light' },
+												labels: ['Times'],
 											}}
-											series={[30]}
+											series={[params.numbs]}
 											type="radialBar"
 											height="auto"
 										/>
@@ -316,7 +349,7 @@ function DeformationMonitorSystem2() {
 									<div className="card__body">
 										<Chart
 											options={{ ...velocityChartOptions.options, theme: { mode: 'light' } }}
-											series={velocityChartOptions.series}
+											series={[params.time]}
 											type="radialBar"
 											height="auto"
 										/>

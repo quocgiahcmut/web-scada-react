@@ -178,7 +178,6 @@ const Dashboard = () => {
 					</div>
 				</div>
 				<div className="col-6">
-					<Link to="/qa-qc/deformation">
 						<div className="card full-height">
 							<Chart
 								options={
@@ -197,7 +196,6 @@ const Dashboard = () => {
 								height="100%"
 							/>
 						</div>
-					</Link>
 				</div>
 				<div className="col-5">
 					<div className="card">

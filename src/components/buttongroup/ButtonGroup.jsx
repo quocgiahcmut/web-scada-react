@@ -8,11 +8,16 @@ function ButtonGroup({ alignment, handleChange }) {
 	return (
 		<ToggleButtonGroup
 			sx={{
+				marginBottom: '10px',
 				'& .MuiButtonBase-root': {
 					color: 'var(--txt-color)',
 				},
+				'& .MuiButtonBase-root:selected': {
+					backgroundColor: 'var(--main-color)',
+				},
 				'& .Mui-selected': {
 					backgroundColor: 'var(--main-color)',
+					color: 'var(--txt-white)',
 				},
 			}}
 			color="primary"

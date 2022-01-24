@@ -14,10 +14,10 @@ const userManager = new UserManager({
 		issuer: 'https://authenticationserver20220111094343.azurewebsites.net',
 		authorization_endpoint: 'https://authenticationserver20220111094343.azurewebsites.net/account/login',
 	},
-	client_id: 'user-management-app',
+	client_id: 'react-client',
 	redirect_uri: 'http://localhost:3000',
 	post_logout_redirect_uri: 'http://localhost:3000',
-	scope: 'openid IdentityServerApi profile',
+	scope: 'openid scope1 profile',
 	response_type: 'code',
 	loadUserInfo: true,
 	automaticSilentRenew: true,
@@ -31,11 +31,11 @@ const Routes = () => {
 		// 		console.log(e);
 		// 	}}
 		// >
-		<Switch>
-			<Route path="/" exact component={Dashboard} />
-			<Route path="/warehouse" component={Customers} />
-			<Route path="/qa-qc" component={QaQc} />
-		</Switch>
+			<Switch>
+				<Route path="/" exact component={Dashboard} />
+				<Route path="/warehouse" component={Customers} />
+				<Route path="/qa-qc" component={QaQc} />
+			</Switch>
 		// </AuthProvider>
 	);
 };

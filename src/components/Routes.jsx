@@ -5,7 +5,7 @@ import { AuthProvider, UserManager } from 'oidc-react';
 import { WebStorageStateStore } from 'oidc-client';
 import Customers from '../pages/Warehouse';
 import Dashboard from '../pages/Dashboard';
-import { QaQc } from '../pages/qaqc/index';
+import { QaQc } from '../pages/qaqc-department/index';
 
 const userManager = new UserManager({
 	userStore: new WebStorageStateStore({ store: window.localStorage }),

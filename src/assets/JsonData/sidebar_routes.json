@@ -6,13 +6,13 @@
         "subNav":[]
     },
     {
-        "display_name": "Overview",
+        "display_name": "Tổng quan",
         "route": "/overview",
         "icon": "bx bx-task",
         "subNav":[]
     },
     {
-        "display_name": "Warehouse",
+        "display_name": "Kho vận",
         "route": "/warehouse",
         "icon": "bx bx-user-pin",
         "subNav":[]
@@ -23,53 +23,53 @@
         "icon": "bx bx-package",
         "subNav":[
         {
-        "display_name": "Deformation",
+        "display_name": "Độ biến dạng",
         "route": "/qa-qc/deformation",
         "icon": "bx bx-desktop"
         },
         {
-        "display_name": "Forced Endurance",
+        "display_name": "Độ bền CB",
         "route": "/qa-qc/f-endurance",
         "icon": "bx bx-desktop"
         },
         {
-        "display_name": "Endurance",
+        "display_name": "Độ bền",
         "route": "/qa-qc/endurance",
         "icon": "bx bx-desktop"
         },
         {
-        "display_name": "Supply Discharge",
+        "display_name": "KT cấp xả",
         "route": "/qa-qc/sup-dis",
         "icon": "bx bx-desktop"
         }
     ]
     },
     {
-        "display_name": "Compressors",
+        "display_name": "Máy ép",
         "route": "/compressors",
         "icon": "bx bx-cart",
         "subNav":[]
     },
     {
-        "display_name": "warning",
+        "display_name": "cảnh báo",
         "route": "/warning",
         "icon": "bx bx-store-alt",
         "subNav":[]
     },
     {
-        "display_name": "profile",
+        "display_name": "hồ sơ",
         "route": "/profile",
         "icon": "bx bx-user",
         "subNav":[]
     },
     {
-        "display_name": "settings",
+        "display_name": "cài đặt",
         "route": "/settings",
         "icon": "bx bx-cog",
         "subNav":[]
     },
     {
-        "display_name": "log out",
+        "display_name": "Đăng xuất",
         "route": "/",
         "icon": "bx bx-log-out",
         "subNav":[]

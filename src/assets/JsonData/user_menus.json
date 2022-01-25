@@ -1,14 +1,14 @@
 [
     {
         "icon": "bx bx-user",
-        "content": "Profile"
+        "content": "Hồ sơ"
     },
     {
         "icon": "bx bx-cog",
-        "content": "Settings"
+        "content": "Cài đặt"
     },
     {
         "icon": "bx bx-log-out-circle bx-rotate-180",
-        "content": "Logout"
+        "content": "Đăng xuất"
     }
 ]
